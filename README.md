@@ -1,6 +1,6 @@
-# Fiskmåsen IF
+# Svalan IK
 
-* Skapa en webbplats som använder REST API för administrativ hantering av idrottsföreningen Fiskmåsen med tre sektioner.
+* Skapa en webbplats som använder REST API för administrativ hantering av idrottsföreningen Svalan med tre sektioner.
     * Fotboll
     * Skidor
     * Gymnastik
