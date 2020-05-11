@@ -1,5 +1,6 @@
 # Svalan IK
 
+## Funktionalitet
 * Skapa en webbplats som använder REST API för administrativ hantering av idrottsföreningen Svalan med tre sektioner.
     * Fotboll
     * Skidor
@@ -27,3 +28,11 @@
     * Ta bort lag/grupper
 
 * Varje medlem kan vara med i flera aktiviteter (exempelvis spela fotboll i F08 och åka skidor i motionsgruppen).
+
+## Kriterier
+* Använd PHP och MySQL på en lokal webbserver.
+* Följ standard för REST APIer.
+* Ge akt på säkerheten.
+* Planera databasen för effektivitet och låg redundans.
+* Antalet medlemmar i databasen måste vara minst 50 (använd gärna ett mockverktyg för att
+skapa dem.) Antalet lag/grupper ska vara minst 10.
