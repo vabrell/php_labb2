@@ -13,12 +13,12 @@ spl_autoload_register('autoloader');
 
 function autoloader($className)
 {
-    $path = DIR . DS . 'Classes' . DS;
+    $path = DIR . DS . '..' . DS . 'Classes' . DS;
     $ext = '.php';
 
-    if (class_exists($path . $className . $ext)) {
+    if (file_exists($path . $className . $ext)) {
         require_once($path . $className . $ext);
     } else {
-        throw new Exception('The class $className was not found');
+        throw new Exception("The class $className was not found");
     }
 }
