@@ -1,6 +1,11 @@
 <?php
 
 /**
+ * PHP Settings
+ */
+declare(strict_types = 1);
+
+/**
  * Constants
  */
 define('DS', DIRECTORY_SEPARATOR);
