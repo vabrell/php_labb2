@@ -14,6 +14,9 @@ try {
     // Create all database tables
     $db->conn->exec($sql);
 
+    // Create the default admin user
+    User::create('Admin', 'Adminsson', 'admin', 'password');
+
     // Print success message
     echo "<div class='text-success'>Databas konstruktionen är nu klar!</div>";
 } catch (PDOException $e) {
