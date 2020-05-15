@@ -7,7 +7,7 @@ require('bootstrap/app.php');
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Svalan IK</title>
+    <title>IK Svalan</title>
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
@@ -16,4 +16,28 @@ require('bootstrap/app.php');
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 </head>
 <body>
-    <div class="container">
+<nav class="navbar navbar-expand-lg navbar-white bg-primary">
+  <a class="navbar-brand text-white" href="#">IK Svalan</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="text-white nav-link" href="./">Startsida</a>
+      </li>
+      <li class="nav-item">
+        <a class="text-white nav-link" href="fotboll.php">Fotboll</a>
+      </li>
+      <li class="nav-item">
+        <a class="text-white nav-link" href="skidor.php">Skidor</a>
+      </li>
+      <li class="nav-item">
+        <a class="text-white nav-link" href="gymnastik.php">Gymnastik</a>
+      </li>
+    </ul>
+    <a class="navbar-text nav-link text-white" href="loggain.php">
+      Logga in
+    </a>
+  </div>
+</nav>
