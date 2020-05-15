@@ -1,5 +1,5 @@
 <?php
-require_once('layouts/header.php'); 
+require_once('layouts/header.php');
 ?>
 
 <div class="bg-light">
@@ -10,5 +10,3 @@ require_once('layouts/header.php');
 
 <?php
 require_once('layouts/footer.php');
-echo ROOT;
-?>
