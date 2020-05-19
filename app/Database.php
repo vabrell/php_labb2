@@ -1,4 +1,5 @@
 <?php
+namespace App;
 
 class Database
 {
@@ -14,9 +15,9 @@ class Database
         // Check if configuration file exists; else throw exception
         try {
             if (!file_exists($this->config)) {
-                throw new Exception('Configuration file does not exist.');
+                throw new \Exception('Configuration file does not exist.');
             }
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             echo "<div class='text-danger'>$e</div>";
             return;
         }
@@ -24,9 +25,9 @@ class Database
         // Try to parse the configuration file; else throw exception
         try {
             if (!$config = parse_ini_file($this->config, true)) {
-                throw new Exception('Could not read configuration file');
+                throw new \Exception('Could not read configuration file');
             }
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             echo "<div class='text-danger'>$e</div>";
             return;
         }
@@ -39,8 +40,8 @@ class Database
         
         // Try to connect to the database; else throw exception
         try {
-            $this->conn = new PDO($dsn, $user, $password);
-        } catch (PDOException $e) {
+            $this->conn = new \PDO($dsn, $user, $password);
+        } catch (\PDOException $e) {
             echo "<div class='text-danger'>{$e->getMessage()}</div>";
             return;
         }

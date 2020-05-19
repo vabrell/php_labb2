@@ -1,4 +1,7 @@
 <?php
+namespace App;
+
+use App\Database;
 
 class Model
 {
@@ -22,7 +25,7 @@ class Model
         $stmt = $db->conn->prepare($sql);
         $stmt->execute();
 
-        return $stmt->fetchAll(PDO::FETCH_CLASS, get_class());
+        return $stmt->fetchAll(\PDO::FETCH_CLASS, get_class());
     }
 
     /**
@@ -94,6 +97,6 @@ class Model
         $stmt = $db->conn->prepare($sql);
         $stmt->execute();
 
-        return $stmt->fetchAll(PDO::FETCH_CLASS, get_class());
+        return $stmt->fetchAll(\PDO::FETCH_CLASS, get_class());
     }
 }
