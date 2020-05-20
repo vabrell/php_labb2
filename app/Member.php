@@ -1,9 +1,9 @@
 <?php
+
 namespace App;
 
-use DateTime;
-
-class Member extends Model {
+class Member extends Model
+{
     protected static $table = 'members';
     protected static $columns = ['id', 'firstName', 'lastName', 'membership'];
 
@@ -18,9 +18,10 @@ class Member extends Model {
      * @param String $firstName
      * @param String $lastName
      * 
-     * @return Int Affected rows
+     * @return Int Last inserted ID
      */
-    public static function create(String $firstName, String $lastName) {
+    public static function create(String $firstName, String $lastName)
+    {
         $db = new Database;
 
         $table = self::$table;
@@ -28,10 +29,12 @@ class Member extends Model {
                 VALUES (:firstName, :lastName)";
 
         $stmt = $db->conn->prepare($sql);
-        return $stmt->execute([
+        $stmt->execute([
             ':firstName' => $firstName,
             ':lastName' => $lastName
         ]);
+
+        return $db->conn->lastInsertId();
     }
 
     /**
@@ -44,7 +47,8 @@ class Member extends Model {
      * 
      * @return Int Affected rows
      */
-    public static function update(Int $id, String $firstName, String $lastName, String $membership = NULL) {
+    public static function update(Int $id, String $firstName, String $lastName, String $membership = NULL)
+    {
         $db = new Database;
 
         $table = self::$table;
