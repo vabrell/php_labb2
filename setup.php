@@ -24,6 +24,11 @@ try {
         App\Member::create($faker->firstName(), $faker->lastName);
     }
 
+    // Create some teams
+    for ($i = 0; $i < 20; $i++) {
+        App\Team::create($faker->word, $faker->numberBetween(1, 3));
+    }
+
     // Print success message
     echo "<div class='text-success'>Databas konstruktionen är nu klar!</div>";
 } catch (PDOException $e) {

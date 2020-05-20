@@ -1,5 +1,6 @@
 -- Create users table if it doesn't exist
-CREATE TABLE IF NOT EXISTS users (
+DROP TABLE IF EXISTS users;
+CREATE TABLE users (
     id INT PRIMARY KEY AUTO_INCREMENT,
     firstName VARCHAR(50) NOT NULL,
     lastName VARCHAR(80) NOT NULL,
@@ -8,9 +9,18 @@ CREATE TABLE IF NOT EXISTS users (
 );
 
 -- Create members table if it doesn't exist
-CREATE TABLE IF NOT EXISTS members (
+DROP TABLE IF EXISTS members;
+CREATE TABLE members (
     id INT PRIMARY KEY AUTO_INCREMENT,
     firstName VARCHAR(50) NOT NULL,
     lastName VARCHAR(80) NOT NULL,
     membership DATETIME
+);
+
+-- Create teams table if it doesn't exist
+DROP TABLE IF EXISTS teams;
+CREATE TABLE teams (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(50) NOT NULL,
+    activity_id INT NOT NULL
 );
