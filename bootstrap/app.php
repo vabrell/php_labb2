@@ -3,7 +3,8 @@
 /**
  * PHP Settings
  */
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 /**
  * Constants
@@ -15,4 +16,4 @@ define('ROOT', __DIR__ . DS . '..' . DS);
 /**
  * Composer Autoloader
  */
-require_once('vendor/autoload.php');
+require_once(PATH . 'vendor/autoload.php');

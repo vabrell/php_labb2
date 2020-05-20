@@ -1,5 +1,6 @@
 <?php
-require('bootstrap/app.php');
+define('PATH', strstr($_SERVER['REQUEST_URI'], 'admin') ? '../' : './');
+require(PATH . 'bootstrap/app.php');
 ?>
 
 <!DOCTYPE html>
@@ -19,29 +20,41 @@ require('bootstrap/app.php');
 
 <body>
   <nav class="navbar navbar-dark navbar-expand-lg navbar-white bg-primary mb-3">
-    <a class="navbar-brand text-white" href="./">IK Svalan</a>
+    <a class="navbar-brand text-white" href="<?php echo PATH ?>">IK Svalan</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="text-white nav-link" href="./">Startsida</a>
+          <a class="text-white nav-link" href="<?php echo PATH ?>">Startsida</a>
         </li>
         <li class="nav-item">
-          <a class="text-white nav-link" href="fotboll.php">Fotboll</a>
+          <a class="text-white nav-link" href="<?php echo PATH ?>fotboll.php">Fotboll</a>
         </li>
         <li class="nav-item">
-          <a class="text-white nav-link" href="skidor.php">Skidor</a>
+          <a class="text-white nav-link" href="<?php echo PATH ?>skidor.php">Skidor</a>
         </li>
         <li class="nav-item">
-          <a class="text-white nav-link" href="gymnastik.php">Gymnastik</a>
+          <a class="text-white nav-link" href="<?php echo PATH ?>gymnastik.php">Gymnastik</a>
         </li>
       </ul>
-      <div class="ml-auto">
-        <a class="navbar-text nav-link text-white" href="loggain.php">
+      <ul class="navbar-nav ml-auto">
+        <!-- TODO: Skall endast visas om det finns en användare inloggad -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            FÖRNAMN EFTERNAMN
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="<?php echo PATH ?>admin">Administration</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="<?php echo PATH ?>loggaut.php">Logga ut</a>
+          </div>
+        </li>
+        <!-- TODO: Skall endast visas om det inte är någon användare inloggad -->
+        <a class="navbar-text nav-link text-white" href="<?php echo PATH ?>loggain.php">
           Logga in
         </a>
-      </div>
+    </div>
     </div>
   </nav>
