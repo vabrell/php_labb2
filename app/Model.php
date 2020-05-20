@@ -1,4 +1,5 @@
 <?php
+
 namespace App;
 
 use App\Database;
@@ -8,6 +9,8 @@ class Model
     protected static $table;
     protected static $columns = [];
     protected static $where;
+    protected static $orderBy = 'id';
+    protected static $order = 'ASC';
 
     /**
      * Fetch all records from the database
@@ -72,6 +75,24 @@ class Model
     }
 
     /**
+     * Order by column
+     * 
+     * @param String $column Column to order by
+     * @param String $order Optional - ASC, DESC
+     * 
+     * @return this
+     */
+    public function orderBy(String $column, String $order = null)
+    {
+        static::$orderBy = $column;
+        if ($order) {
+            static::$order = $order;
+        }
+
+        return $this;
+    }
+
+    /**
      * Run the query
      *
      * @return Array User objects
@@ -84,15 +105,21 @@ class Model
         $table = static::$table;
         $sql = "SELECT $columns FROM $table";
 
-        foreach (static::$where as $index => $where) {
-            if ($index === 0) {
-                $sql .= ' WHERE ';
-            } else {
-                $sql .= ' AND ';
-            }
+        if (static::$where) {
+            foreach (static::$where as $index => $where) {
+                if ($index === 0) {
+                    $sql .= ' WHERE ';
+                } else {
+                    $sql .= ' AND ';
+                }
 
-            $sql .= "{$where['column']} {$where['operator']} '{$where['needle']}'";
+                $sql .= "{$where['column']} {$where['operator']} '{$where['needle']}'";
+            }
         }
+
+        $orderBy = static::$orderBy;
+        $order = static::$order;
+        $sql .= " ORDER BY $orderBy $order";
 
         $stmt = $db->conn->prepare($sql);
         $stmt->execute();
