@@ -1,6 +1,13 @@
 <?php
 define('PATH', strstr($_SERVER['REQUEST_URI'], 'admin') ? '../' : './');
 require(PATH . 'bootstrap/app.php');
+
+// Check if the the request comes from the administration pages and if a user is logged in
+// if not logged in, redirect to the login page
+if (strstr($_SERVER['REQUEST_URI'], 'admin') && !isset($_SESSION['id'])) {
+    $uri = PATH . 'loggain.php';
+    header("Location: $uri");
+}
 ?>
 
 <!DOCTYPE html>
@@ -40,10 +47,14 @@ require(PATH . 'bootstrap/app.php');
         </li>
       </ul>
       <ul class="navbar-nav ml-auto">
-        <!-- TODO: Skall endast visas om det finns en användare inloggad -->
+        <?php
+        // Check if a user is logged in
+        if (isset($_SESSION['id'])){
+            $user = App\User::find($_SESSION['id']);
+        ?>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            FÖRNAMN EFTERNAMN
+            <?php echo "$user->firstName $user->lastName"; ?>
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="<?php echo PATH ?>admin">Administration</a>
@@ -51,10 +62,14 @@ require(PATH . 'bootstrap/app.php');
             <a class="dropdown-item" href="<?php echo PATH ?>loggaut.php">Logga ut</a>
           </div>
         </li>
-        <!-- TODO: Skall endast visas om det inte är någon användare inloggad -->
+        <?php
+        } else {
+        // If no user is logged in show login link
+        ?>
         <a class="navbar-text nav-link text-white" href="<?php echo PATH ?>loggain.php">
           Logga in
         </a>
+        <?php } ?>
     </div>
     </div>
   </nav>
