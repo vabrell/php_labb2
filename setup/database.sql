@@ -25,6 +25,13 @@ CREATE TABLE teams (
     activity_id INT NOT NULL
 );
 
+-- Create activities table if it doesn't exist
+DROP TABLE IF EXISTS activities;
+CREATE TABLE activities (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(50) NOT NULL
+);
+
 -- Create pivot table for teams and members
 DROP TABLE IF EXISTS teams_members;
 CREATE TABLE teams_members (

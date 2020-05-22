@@ -29,6 +29,11 @@ try {
         App\Team::create($faker->word, $faker->numberBetween(1, 3));
     }
 
+    // Create the basic activities
+    App\Activity::create('Fotboll');
+    App\Activity::create('Gymnastik');
+    App\Activity::create('Skidor');
+
     // Add members to teams
     $teams = App\Team::all();
     foreach (App\Member::all() as $member) {
