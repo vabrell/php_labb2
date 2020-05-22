@@ -29,6 +29,11 @@ try {
         App\Team::create($faker->word, $faker->numberBetween(1, 3));
     }
 
+    // Create the basic activities
+    App\Activity::create('Fotboll');
+    App\Activity::create('Gymnastik');
+    App\Activity::create('Skidor');
+
     // Print success message
     echo "<div class='text-success'>Databas konstruktionen är nu klar!</div>";
 } catch (PDOException $e) {

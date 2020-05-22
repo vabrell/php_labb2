@@ -24,3 +24,10 @@ CREATE TABLE teams (
     name VARCHAR(50) NOT NULL,
     activity_id INT NOT NULL
 );
+
+-- Create activities table if it doesn't exist
+DROP TABLE IF EXISTS activities;
+CREATE TABLE activities (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(50) NOT NULL
+);
