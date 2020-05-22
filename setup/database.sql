@@ -24,3 +24,11 @@ CREATE TABLE teams (
     name VARCHAR(50) NOT NULL,
     activity_id INT NOT NULL
 );
+
+-- Create pivot table for teams and members
+DROP TABLE IF EXISTS teams_members;
+CREATE TABLE teams_members (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    team_id INT NOT NULL,
+    member_id INT NOT NULL
+);

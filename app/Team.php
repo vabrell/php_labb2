@@ -11,6 +11,15 @@ class Team extends Model
     public $name;
 
     /**
+     * Get all team members
+     * 
+     * @return Array List of Member objects
+     */
+    public function members() {
+        
+    }
+
+    /**
      * Create a new team
      * 
      * @param String $name

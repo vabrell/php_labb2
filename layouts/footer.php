@@ -1,4 +1,4 @@
-<footer class="text-center text-md-left my-3 fixed-bottom">
+<footer class="text-center text-md-left my-3">
     <div style="padding: 10px 0; margin-bottom: 5px;" class="bg-primary text-white">
         <div class="container">
             <div class="row">
