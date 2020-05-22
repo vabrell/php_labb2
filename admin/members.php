@@ -122,10 +122,11 @@ if (isset($_GET['member'])) {
         <h1>Medlemmar <a href="?action=add" class="h6">Ny medlem</a></h1>
         <?php
         foreach ($members as $member) {
+            $check = $member->membership ? '&check;' : '';
             echo "<p>
                     <a href='?member=$member->id'>
                     $member->firstName $member->lastName
-                    </a>
+                    </a> $check
                 </p>";
         }
     } else {
