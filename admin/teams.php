@@ -29,6 +29,12 @@ if (!empty($_POST)) {
 
         header("Location: ./teams.php");
     }
+
+    if ($action === 'removeMember') {
+        App\TeamsMembers::remove($team_id, $member_id);
+
+        header("Location: ?team=$team_id");
+    }
 }
 
 if (isset($_GET['team'])) {
@@ -96,11 +102,21 @@ if (isset($_GET['team'])) {
             <div>
                 <h3>Medlemmar</h3>
                 <ul>
-                <?php
-                foreach ($team->members() as $member) {
-                    echo "<li><a href='members.php?member=$member->id'>$member->firstName $member->lastName</a></li>";
-                }
-                ?>
+                    <?php
+                    foreach ($team->members() as $member) {
+                        echo "<li>";
+                        echo "<a href='members.php?member=$member->id'>$member->firstName $member->lastName</a>";
+                    ?>
+                        <form method="post" class="d-inline">
+                            <input type="hidden" name="member_id" value="<?php echo $member->id ?>">
+                            <input type="hidden" name="team_id" value="<?php echo $team->id ?>">
+                            <input type="hidden" name="action" value="removeMember">
+                            <button type="submit" class="btn btn-sm btn-outline-danger px-1 py-0">x</button>
+                        </form>
+                    <?php
+                        echo "</li>";
+                    }
+                    ?>
                 </ul>
             </div>
             <form method="post" class="mt-3">

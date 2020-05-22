@@ -103,6 +103,9 @@ class Member extends Model
                 WHERE id = :id
         ";
 
+        // Remove all teams_members connections
+        TeamsMembers::removeByMember($id);
+
         $stmt = $db->conn->prepare($sql);
         return $stmt->execute([
             ':id' => $id

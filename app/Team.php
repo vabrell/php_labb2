@@ -25,7 +25,7 @@ class Team extends Model
         $members = [];
 
         foreach ($_members as  $member) {
-            array_push($members, Member::find($member->id));
+            array_push($members, Member::find($member->member_id));
         }
 
         return $members;
@@ -119,6 +119,9 @@ class Team extends Model
         $sql = "DELETE FROM $table
                 WHERE id = :id
         ";
+
+        // Remove all teams_members connections
+        TeamsMembers::removeByTeam($id);
 
         $stmt = $db->conn->prepare($sql);
         return $stmt->execute([

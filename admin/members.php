@@ -34,6 +34,18 @@ if (!empty($_POST)) {
 
         header("Location: ./members.php");
     }
+
+    if ($action === 'addTeam') {
+        App\TeamsMembers::add($team_id, $member_id);
+
+        header("Location: ./members.php?member=$member_id");
+    }
+
+    if ($action === 'removeTeam') {
+        App\TeamsMembers::remove($team_id, $member_id);
+
+        header("Location: ./members.php?member=$member_id");
+    }
 }
 
 if (isset($_GET['member'])) {
@@ -147,11 +159,19 @@ if (isset($_GET['member'])) {
             <h1><?php echo $member->firstName . ' ' . $member->lastName ?> <a href="?member=<?php echo $member->id ?>&action=edit" class="h6">Editera</a></h1>
             <p><strong>Medlemskap betalt:</strong> <?php echo $member->membership ?? 'Ej betalt' ?></p>
             <div>
-                <a href="?member=<?php echo $member->id ?>&action=addTeam" class="btn btn-sm btn-outline-primary">Lägg till i team</a>
+                <a href="?member=<?php echo $member->id ?>&action=addTeam" class="btn btn-sm btn-outline-primary mb-2">Lägg till i team</a>
                 <?php
                 foreach ($member->teams() as $team) {
                     echo "<h3>{$team->activity()->name}</h3>";
                     echo "<a href='teams.php?team=$team->id'>$team->name</a>";
+                ?>
+                    <form method="post" class="d-inline">
+                        <input type="hidden" name="member_id" value="<?php echo $member->id ?>">
+                        <input type="hidden" name="team_id" value="<?php echo $team->id ?>">
+                        <input type="hidden" name="action" value="removeTeam">
+                        <button type="submit" class="btn btn-sm btn-outline-danger px-1 py-0">x</button>
+                    </form>
+                <?php
                 }
                 ?>
             </div>
