@@ -13,6 +13,25 @@ class Member extends Model
     public $membership;
 
     /**
+     * Get all teams for member
+     * 
+     * @return Array List of Team objects
+     */
+    public function teams()
+    {
+        $tm = new TeamsMembers;
+        $_teams = $tm->where('member_id', '=', $this->id)->get();
+        $teams = [];
+
+
+        foreach ($_teams as $team) {
+            array_push($teams, Team::find($team->team_id));
+        }
+
+        return $teams;
+    }
+
+    /**
      * Create a new member
      * 
      * @param String $firstName

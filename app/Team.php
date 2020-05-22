@@ -2,6 +2,10 @@
 
 namespace App;
 
+use App\TeamsMembers;
+use App\Member;
+use App\Activity;
+
 class Team extends Model
 {
     protected static $table = 'teams';
@@ -16,7 +20,35 @@ class Team extends Model
      * @return Array List of Member objects
      */
     public function members() {
-        
+        $tm = new TeamsMembers;
+        $_members = $tm->where('team_id', '=', $this->id)->get();
+        $members = [];
+
+        foreach ($_members as  $member) {
+            array_push($members, Member::find($member->id));
+        }
+
+        return $members;
+    }
+
+    /**
+     * Get activity
+     * 
+     * @return Object App\Activity
+     */
+    public function activity()
+    {
+        return Activity::find($this->activity_id);
+    }
+
+    /**
+     * Get the member count for team
+     */
+    public function memberCount() {
+        $tm = new TeamsMembers;
+        $members = $tm->where('team_id', '=', $this->id)->get();
+
+        return count($members);
     }
 
     /**

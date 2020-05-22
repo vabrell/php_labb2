@@ -8,9 +8,10 @@ class Model
 {
     protected static $table;
     protected static $columns = [];
-    protected static $where;
-    protected static $orderBy = 'id';
-    protected static $order = 'ASC';
+
+    protected $where;
+    protected $orderBy = 'id';
+    protected $order = 'ASC';
 
     /**
      * Fetch all records from the database
@@ -65,7 +66,7 @@ class Model
      */
     public function where(String $column, String $operator, String $needle)
     {
-        static::$where[] = [
+        $this->where[] = [
             'column' => $column,
             'operator' => $operator,
             'needle' => $needle
@@ -84,9 +85,9 @@ class Model
      */
     public function orderBy(String $column, String $order = null)
     {
-        static::$orderBy = $column;
+        $this->orderBy = $column;
         if ($order) {
-            static::$order = $order;
+            $this->order = $order;
         }
 
         return $this;
@@ -105,8 +106,8 @@ class Model
         $table = static::$table;
         $sql = "SELECT $columns FROM $table";
 
-        if (static::$where) {
-            foreach (static::$where as $index => $where) {
+        if ($this->where) {
+            foreach ($this->where as $index => $where) {
                 if ($index === 0) {
                     $sql .= ' WHERE ';
                 } else {
@@ -117,8 +118,8 @@ class Model
             }
         }
 
-        $orderBy = static::$orderBy;
-        $order = static::$order;
+        $orderBy = $this->orderBy;
+        $order = $this->order;
         $sql .= " ORDER BY $orderBy $order";
 
         $stmt = $db->conn->prepare($sql);

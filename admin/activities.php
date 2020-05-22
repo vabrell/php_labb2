@@ -59,7 +59,7 @@ if (isset($_GET['activity'])) {
         foreach ($activities as $activity) {
             echo "<p>
                     <a href='?activity=$activity->id'>
-                    $activity->name
+                    $activity->name <span class='badge badge-primary'>{$activity->memberCount()}</span>
                     </a>
                 </p>";
         }
@@ -82,7 +82,17 @@ if (isset($_GET['activity'])) {
         } else {
         ?>
             <h1><?php echo $activity->name ?> <a href="?activity=<?php echo $activity->id ?>&action=edit" class="h6">Editera</a></h1>
-            <form method="post">
+            <div>
+                <h3>Teams</h3>
+                <ul>
+                    <?php
+                    foreach ($activity->teams() as $team) {
+                        echo "<li><a href='teams.php?team=$team->id'>$team->name</a> <span class='badge badge-primary'>{$team->memberCount()}</span></li>";
+                    }
+                    ?>
+                </ul>
+            </div>
+            <form method="post" class="mt-3">
                 <input type="hidden" name="id" value="<?php echo $activity->id ?>">
                 <input type="hidden" name="action" value="delete">
                 <button type="submit" class="btn btn-sm btn-outline-danger">Ta bort</button>

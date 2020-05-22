@@ -37,7 +37,7 @@ try {
     // Add members to teams
     $teams = App\Team::all();
     foreach (App\Member::all() as $member) {
-        // 
+        App\TeamsMembers::add($teams[rand(0, count($teams) - 1)]->id, $member->id);
     }
 
     // Print success message

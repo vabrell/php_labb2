@@ -63,6 +63,48 @@ if (isset($_GET['member'])) {
             <button type="submit" class="btn btn-primary">Lägg till</button>
         </form>
     <?php
+    } else if (isset($_GET['action']) && $_GET['action'] === 'addTeam') {
+    ?>
+        <h1>Lägg till medlem i team</h1>
+        <form method="post">
+            <div class="form-group">
+                <label for="firstName">Medlem</label>
+                <input type="text" id="firstName" class="form-control disabled" disabled value="<?php echo $member->firstName . ' ' . $member->lastName ?>">
+                <input type="hidden" name="member_id" value="<?php echo $member->id ?>">
+            </div>
+            <div class="form-group">
+                <label for="activity">Aktivitet</label>
+                <select name="activity_id" id="activity" class="form-control" required>
+                    <option selected disabled>-- Välj en aktivitet --</option>
+                    <?php
+                    foreach (App\Activity::all() as $activity) {
+                        echo "<option value='$activity->id'>$activity->name</option>";
+                    }
+                    ?>
+                </select>
+            </div>
+            <?php
+            foreach (App\Activity::all() as $activity) {
+            ?>
+                <div id="activity-<?php echo $activity->id ?>" class="form-group d-none">
+                    <label for="team">Team/Lag</label>
+                    <select name="team_id" id="team" class="form-control">
+                        <option selected disabled>-- Välj en aktivitet --</option>
+                        <?php
+
+                        foreach ($activity->teams() as $team) {
+                            echo "<option value='$team->id'>$team->name</option>";
+                        }
+                        ?>
+                    </select>
+                </div>
+            <?php
+            }
+            ?>
+            <input type="hidden" name="action" value="addTeam">
+            <button type="submit" class="btn btn-primary">Lägg till</button>
+        </form>
+    <?php
     } else if (!$member) {
     ?>
         <h1>Medlemmar <a href="?action=add" class="h6">Ny medlem</a></h1>
@@ -104,7 +146,16 @@ if (isset($_GET['member'])) {
         ?>
             <h1><?php echo $member->firstName . ' ' . $member->lastName ?> <a href="?member=<?php echo $member->id ?>&action=edit" class="h6">Editera</a></h1>
             <p><strong>Medlemskap betalt:</strong> <?php echo $member->membership ?? 'Ej betalt' ?></p>
-            <form method="post">
+            <div>
+                <a href="?member=<?php echo $member->id ?>&action=addTeam" class="btn btn-sm btn-outline-primary">Lägg till i team</a>
+                <?php
+                foreach ($member->teams() as $team) {
+                    echo "<h3>{$team->activity()->name}</h3>";
+                    echo "<a href='teams.php?team=$team->id'>$team->name</a>";
+                }
+                ?>
+            </div>
+            <form method="post" class="mt-3">
                 <input type="hidden" name="id" value="<?php echo $member->id ?>">
                 <input type="hidden" name="action" value="delete">
                 <button type="submit" class="btn btn-sm btn-outline-danger">Ta bort</button>
@@ -113,6 +164,19 @@ if (isset($_GET['member'])) {
         }
     }
     ?>
+
+    <script>
+        document.querySelector("#activity").addEventListener("change", (e) => {
+            if (oEl = document.querySelector(".d-block")) {
+                oEl.classList.remove('d-block')
+                oEl.classList.add('d-none')
+            }
+
+            let nEl = document.querySelector("#activity-" + e.target.value).classList
+            nEl.remove('d-none')
+            nEl.add('d-block')
+        })
+    </script>
 </div>
 <?php
 require_once('../layouts/footer.php');

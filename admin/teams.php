@@ -92,7 +92,18 @@ if (isset($_GET['team'])) {
         } else {
         ?>
             <h1><?php echo $team->name ?> <a href="?team=<?php echo $team->id ?>&action=edit" class="h6">Editera</a></h1>
-            <form method="post">
+            <p>Aktivitet: <a href="activities.php?activity=<?php echo $team->activity()->id ?>"><?php echo $team->activity()->name ?></a></p>
+            <div>
+                <h3>Medlemmar</h3>
+                <ul>
+                <?php
+                foreach ($team->members() as $member) {
+                    echo "<li><a href='members.php?member=$member->id'>$member->firstName $member->lastName</a></li>";
+                }
+                ?>
+                </ul>
+            </div>
+            <form method="post" class="mt-3">
                 <input type="hidden" name="id" value="<?php echo $team->id ?>">
                 <input type="hidden" name="action" value="delete">
                 <button type="submit" class="btn btn-sm btn-outline-danger">Ta bort</button>

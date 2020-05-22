@@ -11,6 +11,39 @@ class Activity extends Model
     public $name;
 
     /**
+     * Get all teams for activity
+     * 
+     * @return Array List of Team objects
+     */
+    public function teams()
+    {
+        $tm = new Team;
+        $_teams = $tm->where('activity_id', '=', $this->id)->get();
+        $teams = [];
+
+
+        foreach ($_teams as $team) {
+            array_push($teams, Team::find($team->id));
+        }
+
+        return $teams;
+    }
+
+    /**
+     * Member count for activity
+     * 
+     * @return Int Count of members
+     */
+    public function memberCount() {
+        $count = 0;
+        foreach ($this->teams() as $team) {
+            $count += $team->memberCount();
+        }
+
+        return $count;
+    }
+
+    /**
      * Create a new activity
      * 
      * @param String $name
