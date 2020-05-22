@@ -7,10 +7,10 @@ class Member extends Model
     protected static $table = 'members';
     protected static $columns = ['id', 'firstName', 'lastName', 'membership'];
 
-    private $id;
-    private $firstName;
-    private $lastName;
-    private $membership;
+    public $id;
+    public $firstName;
+    public $lastName;
+    public $membership;
 
     /**
      * Create a new member

@@ -7,8 +7,8 @@ class Team extends Model
     protected static $table = 'teams';
     protected static $columns = ['id', 'name', 'activity_id'];
 
-    private $id;
-    private $name;
+    public $id;
+    public $name;
 
     /**
      * Create a new team
